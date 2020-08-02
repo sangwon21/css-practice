@@ -112,12 +112,19 @@
     <script>
       (function () {
         const stageElem = document.querySelector(".stage");
+        let currentItem;
 
         const doorHandler = (e) => {
           const { target } = e;
 
+          const currentItem = document.querySelector(".door-opened");
+          if (currentItem) {
+            currentItem.classList.remove("door-opened");
+          }
+
           if (target.classList.contains("door-body")) {
             target.parentNode.classList.add("door-opened");
+            currentItem = target.parentNode;
           }
         };
 
