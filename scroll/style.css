@@ -50,6 +50,7 @@ body[data-char="ragirl"] {
 .wall-left {
   /* left: -500vw; */
   width: 1000vw;
+  background: #f8f8f8;
   transform: rotateY(90deg) translateZ(-500vw);
 }
 
@@ -57,7 +58,21 @@ body[data-char="ragirl"] {
   /* left: -500vw; */
   width: 1000vw;
   /* transform: rotateY(90deg) translateZ(100vw); */
+  background: #f8f8f8;
   transform: rotateY(90deg) translateZ(-400vw);
+}
+
+.wall-front-a {
+  transform: translateZ(300vw);
+}
+.wall-front-b {
+  transform: translateZ(50vw);
+}
+.wall-front-c {
+  transform: translateZ(-200vw);
+}
+.wall-front-d {
+  transform: translateZ(-500vw);
 }
 
 .wall-content {
