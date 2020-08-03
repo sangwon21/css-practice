@@ -34,6 +34,7 @@ body {
 
 body[data-char="ragirl"] {
   background: #ff7200;
+  transition: background 0.5s;
 }
 
 /* world */

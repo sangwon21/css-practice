@@ -1,4 +1,4 @@
-function Character({ xPos }) {
+function Character({ xPos, speed }) {
   this.mainElem = document.createElement("div");
   this.mainElem.classList.add("character");
   this.mainElem.innerHTML = `<div class="character-face-con character-head">
@@ -33,7 +33,7 @@ function Character({ xPos }) {
   // 바로 이전 스크롤 위치
   this.lastScrollTop = 0;
   // 스피드
-  this.speed = 0.6;
+  this.speed = speed;
   this.xPos = xPos;
   this.direction;
 
@@ -99,6 +99,7 @@ Character.prototype = {
       function (e) {
         this.mainElem.classList.remove("running");
         cancelAnimationFrame(this.rafId);
+        this.runningState = false;
       }.bind(this)
     );
   },
@@ -109,6 +110,13 @@ Character.prototype = {
       this.xPos += this.speed;
     }
 
+    if (self.xPos < 2) {
+      self.xPos = 2;
+    }
+
+    if (self.xPos > 88) {
+      self.xPos = 88;
+    }
     this.mainElem.style.left = this.xPos + "%";
 
     self.rafId = requestAnimationFrame(function () {
