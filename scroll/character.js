@@ -30,6 +30,8 @@ function Character({ xPos }) {
   this.mainElem.style.left = `${xPos}%`;
   //scroll 상태 표시
   this.scrollState = false;
+  // 바로 이전 스크롤 위치
+  this.lastScrollTop = 0;
   this.init();
 }
 
@@ -52,6 +54,13 @@ Character.prototype = {
           }.bind(this),
           500
         );
+
+        if (this.lastScrollTop > pageYOffset) {
+          this.mainElem.setAttribute("data-direction", "backward");
+        } else {
+          this.mainElem.setAttribute("data-direction", "forward");
+        }
+        this.lastScrollTop = pageYOffset;
       }.bind(this)
     );
   },
