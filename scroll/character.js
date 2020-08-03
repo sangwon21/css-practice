@@ -32,6 +32,9 @@ function Character({ xPos }) {
   this.scrollState = false;
   // 바로 이전 스크롤 위치
   this.lastScrollTop = 0;
+  // 스피드
+  this.speed = 1;
+  this.xPos = xPos;
   this.init();
 }
 
@@ -61,6 +64,30 @@ Character.prototype = {
           this.mainElem.setAttribute("data-direction", "forward");
         }
         this.lastScrollTop = pageYOffset;
+      }.bind(this)
+    );
+
+    window.addEventListener(
+      "keydown",
+      function (e) {
+        if (e.keyCode === 37) {
+          this.mainElem.setAttribute("data-direction", "left");
+          this.mainElem.classList.add("running");
+          this.xPos -= this.speed;
+          this.mainElem.style.left = `${this.xPos}%`;
+        } else if (e.keyCode === 39) {
+          this.mainElem.setAttribute("data-direction", "right");
+          this.mainElem.classList.add("running");
+          this.xPos += this.speed;
+          this.mainElem.style.left = `${this.xPos}%`;
+        }
+      }.bind(this)
+    );
+
+    window.addEventListener(
+      "keyup",
+      function (e) {
+        this.mainElem.classList.remove("running");
       }.bind(this)
     );
   },
