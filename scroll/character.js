@@ -29,4 +29,17 @@ function Character({ xPos }) {
   console.log("xPos is ", xPos);
   document.querySelector(".stage").appendChild(this.mainElem);
   this.mainElem.style.left = `${xPos}%`;
+  this.init();
 }
+
+Character.prototype = {
+  constructor: Character,
+  init: function () {
+    window.addEventListener(
+      "scroll",
+      function () {
+        this.mainElem.classList.add("running");
+      }.bind(this)
+    );
+  },
+};
