@@ -26,9 +26,10 @@ function Character({ xPos }) {
     <div class="character-face character-leg-face face-back"></div>
   </div>
 </div>`;
-  console.log("xPos is ", xPos);
   document.querySelector(".stage").appendChild(this.mainElem);
   this.mainElem.style.left = `${xPos}%`;
+  //scroll 상태 표시
+  this.scrollState = false;
   this.init();
 }
 
@@ -38,7 +39,19 @@ Character.prototype = {
     window.addEventListener(
       "scroll",
       function () {
-        this.mainElem.classList.add("running");
+        clearTimeout(this.scrollState);
+
+        if (!this.scrollState) {
+          this.mainElem.classList.add("running");
+        }
+
+        this.scrollState = setTimeout(
+          function () {
+            this.scrollState = false;
+            this.mainElem.classList.remove("running");
+          }.bind(this),
+          500
+        );
       }.bind(this)
     );
   },
